@@ -2,22 +2,18 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+
+	"github.com/pedropaccola/go-restapi-alura/models"
+	"github.com/pedropaccola/go-restapi-alura/routes"
 )
 
 func main() {
+	models.People = []models.Person{
+		{ID: 1, Name: "Name01", History: "History01"},
+		{ID: 2, Name: "Name02", History: "History02"},
+	}
+
 	fmt.Println("Starting REST server")
-	HandleRequest()
+	routes.HandleRequest()
 	fmt.Println("REST server started")
 }
-
-func HandleRequest() {
-	http.HandleFunc("/", Home)
-	log.Fatal(http.ListenAndServe(":8000", nil))
-}
-
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Home Page")
-}
-
